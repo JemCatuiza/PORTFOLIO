@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Website</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background-color: rgb(173, 44, 44);
+            color: #f9f9f9;
+            padding: 20px 0;
+            position: relative;
+        }
+
+        .logo {
+    display: flex;
+    align-items: center; /* Aligns image and text vertically */
+    font-size: 1.5em;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #f9f9f9;
+}
+
+.logo-image {
+    width: 40px; /* Adjust the size as needed */
+    height: 40px;
+    margin-right: 10px; /* Space between the logo and the text */
+}
+
+        nav {
+            float: right;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #f4b400;
+        }
+
+        /* Mobile Navigation */
+        .menu-icon {
+            display: none;
+            font-size: 2em;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                float: none;
+            }
+
+            nav ul {
+                flex-direction: column;
+                display: none;
+                width: 100%;
+                background-color: black;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                text-align: center;
+            }
+
+            nav ul.showing {
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            .menu-icon {
+                display: inline-block;
+                position: absolute;
+                right: 20px;
+                top: 20px;
+            }
+        }
+
+        /* Hero Section */
+        #hero {
+            background: url('https://via.placeholder.com/1200x600') no-repeat center center/cover;
+            color: #fff;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        #hero h2 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        #hero p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        #hero .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #f4b400;
+            color: #002244;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        #hero .btn:hover {
+            background-color: #d29e00;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        section h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #002244;
+        }
+
+        section p {
+            margin-bottom: 30px;
+        }
+
+        section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        /* Products Section */
+        #products .products-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        #products .product-item {
+            width: 30%;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #products .product-item h3 {
+            margin: 15px 0;
+        }
+
+        @media (max-width: 768px) {
+            
+            #products .product-item {
+                width: 100%;
+            }
+            .container1 {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .left-section,
+    .right-section {
+        padding: 0;
+        width: 100%;
+    }
+
+    .right-section {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    iframe {
+        width: 100%;
+        height: auto;
+    }
+            
+        }
+
+        /* Timeline Section */
+        #timeline .timeline {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #timeline .timeline-item {
+            width: 80%;
+            background-color: #f4f4f4;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 10px;
+        }
+
+        /* Contact Section */
+        #contact form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #contact form input,
+        #contact form textarea {
+            width: 100%;
+            max-width: 500px;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #contact form button {
+            padding: 10px 20px;
+            background-color: red;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #contact form button:hover {
+            background-color: #f4b400;
+        }
+        .container1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+}
+
+.left-section {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.right-section {
+    flex: 1;
+    text-align: left;
+    padding-left: 20px;
+}
+
+video {
+    width: 100%;
+    height: auto;
+}
+
+.right-section h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.right-section p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.read-more {
+    background-color: #d32f2f;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.read-more:hover {
+    background-color: #b71c1c;
+}
+        
+
+        /* Footer */
+        footer {
+            background-color: #002244;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    
+    <header>
+        <div class="container">
+            <h1 class="logo">
+                <img src="image/hyteclog.png" alt="Hotel Logo" class="logo-image">
+                Hotel Name
+            </h1>
+            <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#products">Our Products</a></li>
+                    <li><a href="#mission">Mission & Vision</a></li>
+                    <li><a href="#timeline">Timeline</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero">
+        <div class="container">
+            <h2>Welcome to Our Hotel</h2>
+            <p>Your perfect stay, your way.</p>
+            <a href="#about" class="btn">Learn More</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt augue eu est interdum, et cursus purus pretium. Vivamus a fringilla lectus.</p>
+            <img src="image/About us.jpg" alt="About Image">
+        </div>
+        
+        <div class="container1">
+            <div class="left-section">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/cTTRrq_NlUs?si=iCC-MmUE054CKsQ9" title="YouTube video player" frameborder="0" allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+            <div class="right-section">
+                <h1>Hytec Power, Incorporated</h1>
+                <p>Hytec Power, Incorporated is an innovative company providing products and services for both academe and industry. We are the leading industrial and educational solutions provider in the Philippines.</p>
+                <p>We are consistently providing industrial solutions to common problems in the industry to achieve work productivity, operational efficiency, and workplace safety. We offer solutions to job skills mismatch in the country. We supply not only equipment and services to academe and industry but also provide rigorous after-sales training and support to all our clients. Our commitment is your satisfaction…</p>
+                <button class="read-more">READ MORE</button>
+            </div>
+        </div>
+    
+    </section>
+
+    <section id="products">
+        <div class="container">
+            <h2>Our Products</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt augue eu est interdum, et cursus purus pretium.</p>
+            <div class="products-grid">
+                <div class="product-item">
+                    <img src="https://via.placeholder.com/400x300" alt="Product 1">
+                    <h3>Product 1</h3>
+                    <p>Description of Product 1.</p>
+                </div>
+                <div class="product-item">
+                    <img src="https://via.placeholder.com/400x300" alt="Product 2">
+                    <h3>Product 2</h3>
+                    <p>Description of Product 2.</p>
+                </div>
+                <div class="product-item">
+                    <img src="https://via.placeholder.com/400x300" alt="Product 3">
+                    <h3>Product 3</h3>
+                    <p>Description of Product 3.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="mission">
+        <div class="container">
+            <h2>Mission & Vision</h2>
+            <p>Our mission is to provide an unforgettable experience to our guests by offering luxury, comfort, and exceptional service.</p>
+            <p>Our vision is to be the leading hotel that sets the standard for hospitality excellence worldwide.</p>
+        </div>
+    </section>
+
+    <section id="timeline">
+        <div class="container">
+            <h2>Our Journey</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>2020</h3>
+                    <p>Founded our first hotel branch in the city.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>2021</h3>
+                    <p>Expanded to two more cities with modern amenities.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>2023</h3>
+                    <p>Launched our premium services and membership program.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <p>Feel free to reach out to us for any inquiries or reservations.</p>
+            <form>
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Hotel Name. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('showing');
+        
+        }
+        document.querySelector('.read-more').addEventListener('click', () => {
+    alert('Navigating to more details...');
+});
+
+    </script>
+</body>
+</html>

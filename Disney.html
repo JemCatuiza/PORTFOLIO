@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disney XD Theme Landing Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #282828;
+            color: #fff;
+        }
+
+        .header {
+            background-color: #9100ec;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Adjusts spacing between items */
+        }
+
+        .header img {
+            height: 50px;
+            margin-right: 20px;
+        }
+
+        .header h1 {
+            flex: 1;
+            margin: 0;
+        }
+
+        .hero {
+            background-color: #9100ec;
+            position: relative;
+            background-image: url('image/dsbgg.jpg'); /* Add your image URL */
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            text-shadow: 2px 2px 5px #000;
+            font-size: 3em;
+            animation: fadeIn 2s ease-in-out;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .content {
+            padding: 20px;
+            text-align: center;
+            background-color: #070808;
+        }
+
+        .card {
+            background-color: #1d1f21;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 20px;
+            padding: 20px;
+            text-align: left;
+            display: inline-block;
+            width: 300px;
+            vertical-align: top;
+            transition: transform 0.3s ease;
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card img {
+    width: 100%;
+    height: 200px; /* Set a fixed height */
+    object-fit: cover; /* Ensures the image covers the area */
+    border-radius: 10px 10px 0 0;
+}
+
+
+        .card h3 {
+            margin: 15px 0 10px;
+        }
+
+        .card p {
+            color: #bbb;
+        }
+
+        
+        @media (max-width: 768px) {
+            .hero {
+                font-size: 2em;
+                height: 300px;
+            }
+
+            .card {
+                width: calc(50% - 40px); /* Two cards per row with margin */
+            }
+
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .header img {
+                margin-bottom: 10px;
+            }
+
+            .header h1 {
+                flex: unset;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                font-size: 1.5em;
+                height: 250px;
+            }
+
+            .content {
+                padding: 10px;
+            }
+
+            .card {
+                width: calc(100% - 40px); /* One card per row with margin */
+                margin: 10px auto; /* Center the card */
+                padding: 15px;
+            }
+
+            .card h3 {
+                font-size: 1.2em;
+                margin: 10px 0 5px;
+            }
+
+            .card p {
+                font-size: 0.9em;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .footer {
+            background-color: #1d1f21;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .social-icon {
+            font-size: 24px;
+            color: #fff;
+            margin: 0 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.1);
+            color: #9100ec; /* Optional: Change color on hover */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <img src="image/disney.png" alt="Disney XD Logo">
+        <h1>Disney XD</h1>
+    </div>
+
+    <div class="hero">
+        <div class="hero-content">
+            Welcome to DisneyXD 
+        </div>
+    </div>
+    <a href="PAB.HTML" style="text-decoration: none; color: inherit;">
+    <div class="content">
+        <div class="card">
+            <img src="image/paf.jpg" alt="Feature 1">
+            <h3>Phineas and Ferb</h3>
+            <p>Experience the best of Disney XD.</p>
+        </div>
+    </a>
+    <a href="gravityfalls.html" style="text-decoration: none; color: inherit;">
+        <div class="card">
+            <img src="image/gravity.jpg" alt="Feature 2">
+            <h3>Gravity Falls</h3>
+            <p>Watch your favorite shows and more.</p>
+        </div>
+    </a>
+    <a href="ducktales.html" style="text-decoration: none; color: inherit;">
+        <div class="card">
+            <img src="image/dt.jpg" alt="Feature 3">
+            <h3>Duck Tales</h3>
+            <p>Discover new adventures every day.</p>
+        </div>
+        </a>
+        <a href="sofiathefirst.html" style="text-decoration: none; color: inherit;">
+            <div class="card">
+                <img src="image/sfbg.jpg" alt="Feature 4">
+                <h3>Sofia the First</h3>
+                <p>Watch your favorite shows and more.</p>
+            </div>
+        </a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <a href="https://www.facebook.com/DisneyXD" target="_blank">
+                <i class="fab fa-facebook-f social-icon"></i>
+            </a>
+            <a href="https://www.youtube.com/DisneyXD" target="_blank">
+                <i class="fab fa-youtube social-icon"></i>
+            </a>
+            <a href="https://twitter.com/DisneyXD" target="_blank">
+                <i class="fab fa-twitter social-icon"></i>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // Add any JavaScript you need here
+    </script>
+</body>
+</html>

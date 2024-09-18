@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>| Phineas and Ferb |</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+            margin: 0;
+            padding: 0;
+            color: #f4f4f4;
+        }
+        header {
+    background-color: #9100ec;
+    color: #efe9e3;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-x: hidden; /* Prevent horizontal overflow */
+  
+}
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            justify-content: space-between;
+            flex-wrap: wrap; /* Allow elements to wrap */
+        }
+
+        .navbar-right {
+            display: flex;
+            align-items: left;
+            margin-left: auto;
+            flex-wrap: wrap; /* Allow elements to wrap */
+            width: 20%;
+        }
+
+        .navbar-right a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 10px; /* Add margin to separate links */
+            padding: 5px; /* Add padding for better click area */
+        }
+
+        .navbar-right a:hover {
+            text-decoration: underline;
+        }
+
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap; /* Allow elements to wrap */
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo img {
+            max-height: 50px;
+        }
+
+        .logo img:first-child {
+            width: 60px;
+        }
+
+        .logo img:last-child {
+            width: 100px;
+            margin-left: 10px;
+            max-width: 90%; /* Ensure image does not exceed container width */
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        .video-section {
+            flex: 1;
+            max-width: 800px;
+            margin-right: 20px;
+        }
+
+        .video-section iframe {
+            width: 100%;
+            height: 450px;
+            border: 2px solid rgb(106, 6, 148); 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-details {
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        .video-details h1 {
+            font-size: 2em;
+            margin: 0 0 10px;
+            color: #ffffff;
+        }
+
+        .video-details p {
+            margin: 0;
+            color: #ffffff;
+        }
+
+        .episode-list {
+            flex: 1;
+            max-width: 400px;
+            background: #9100ec;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            border: 2px solid rgb(32, 224, 6);
+        }
+
+        .episode-list h2 {
+            color: #0a0f0a;
+            margin-bottom: 20px;
+        }
+
+        .episode {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    border-top: 2px solid #070707; /* Add border to the top */
+    
+    padding-top: 10px; /* Optional: add padding to space out content from the border */
+    padding-bottom: 10px; /* Optional: add padding to space out content from the border */
+}
+
+
+        .episode img {
+            width: 120px;
+            height: auto;
+            margin-right: 15px;
+            border-radius: 4px;
+        }
+
+        .episode a {
+            text-decoration: none;
+            color:#ebe3e3;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .episode a:hover {
+            text-decoration: underline;
+            color: #00e823;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            main {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .video-section {
+                margin-right: 0;
+                margin-bottom: 20px;
+                max-width: 100%;
+            }
+
+            .episode-list {
+                max-width: 100%;
+            }
+
+            .video-section iframe {
+                height: 300px;
+            }
+
+            .episode img {
+                width: 80px;
+                margin-right: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .video-section iframe {
+                height: 200px;
+            }
+
+            .video-details h1 {
+                font-size: 1.5em;
+            }
+
+            .episode img {
+                width: 60px;
+                margin-right: 10px;
+            }
+        }
+    </style>
+    <script>
+        function playEpisode(url, title, description) {
+            document.getElementById('videoPlayer').src = url;
+            document.getElementById('videoTitle').innerText = title;
+            document.getElementById('videoDescription').innerText = description;
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="navbar-left">
+                <a href="#" class="logo">
+                    <img src="image/disney.png" alt="Left Logo">
+                    
+                </a>
+            </div>
+            <div class="navbar-right">
+                <a href="disney.html">Home</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="video-section">
+            <iframe id="videoPlayer" src="https://www.youtube.com/embed/fLWBx37eKBM?si=WF6n6hNbo-rkJgF6" title="YouTube video player" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+            <div class="video-details">
+                <h1 id="videoTitle">Phineas and Ferb First Episode | Rollercoaster | S1 E1 | Full Episode |</h1>
+                <p id="videoDescription">This is the description of the video. Enjoy watching!</p>
+            </div>
+        </div>
+        
+        <div class="episode-list">
+            <h2> Phineas and Ferb | Episodes </h2>
+            <div class="episode">
+                <img src="image/PABEP2.png" alt="Episode 2 Thumbnail">
+                <a href="javascript:void(0)" onclick="playEpisode('https://www.youtube.com/embed/NNOkMRw78t8?si=9nN1DkRAN-lcNeA5', 'The Backyard Beach Episode| S1 E2 | Full Episode | Phineas and Ferb |', 'Description for Episode 2')">The Backyard Beach Episode| S1 E2 | Full Episode | Phineas and Ferb |</a>
+            </div>
+            <div class="episode">
+                <img src="image/PABEP3.png" alt="Episode 3 Thumbnail">
+                <a href="javascript:void(0)" onclick="playEpisode('https://www.youtube.com/embed/467GFAwZvR4?si=YMoYir6b4l_gU6LD', 'winter | S1 E3 | Full Episode | Phineas and Ferb |', 'Description for Episode 3')">S'winter | S1 E3 | Full Episode | Phineas and Ferb |</a>
+            </div>
+            <div class="episode">
+                <img src="image/PABEP4.png" alt="Episode 4 Thumbnail">
+                <a href="javascript:void(0)" onclick="playEpisode('https://www.youtube.com/embed/fRm09idULbg?si=nrThioiMI5K3ogHD', 'Flop Starz | S1 E4 | Full Episode | Phineas and Ferb |', 'Description for Episode 4')">Flop Starz | S1 E4 | Full Episode | Phineas and Ferb |</a>
+            </div>
+            <div class="episode">
+                <img src="image/PABEP5.png" alt="Episode 5 Thumbnail">
+                <a href="javascript:void(0)" onclick="playEpisode('https://www.youtube.com/embed/lXW1g38ylOw?si=n7V11nWTSKHszmKV', 'Lights, Candace, Action! | S1 E5 | Full Episode | Phineas and Ferb |', 'Description for Episode 5')">Lights, Candace, Action! | S1 E5 | Full Episode | Phineas and Ferb |</a>
+            </div>
+            <div class="episode">
+                <img src="image/PABEP6.png" alt="Episode 6 Thumbnail">
+                <a href="javascript:void(0)" onclick="playEpisode('https://www.youtube.com/embed/Ov4hnz8Yy8k?si=dXtQUB_fqJIfsg7', 'Get That Bigfoot Outa My Face! | S1 E6 | Full Episode | Phineas and Ferb |', 'Description for Episode 6')">Get That Bigfoot Outa My Face! | S1 E6 | Full Episode | Phineas and Ferb |</a>
+            </div>
+           
+        </div>
+    </main>
+</body>
+</html>

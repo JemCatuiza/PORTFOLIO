@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Page</title>
+    <style>
+    /* Basic reset and styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    /* Styles for the welcome overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    display: none; /* Initially hidden */
+}
+
+.overlay-content {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    border-radius: 8px;
+    max-width: 90%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.overlay-content h2 {
+    margin-bottom: 10px;
+}
+
+.overlay-content p {
+    margin-bottom: 20px;
+}
+
+.overlay-content button {
+    padding: 10px 20px;
+    background-color: #FFA857;
+    color: #2E2E2E;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.overlay-content button:hover {
+    background-color: #e59e48;
+}
+
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+    }
+
+    header {
+        background-color: #2E2E2E;
+        color: #FFA857;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        width: 100%;
+    }
+
+    .navbar {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .navbar-left {
+        display: flex;
+        align-items: center;
+    }
+
+    .menu-icon {
+        font-size: 1.5rem;
+        cursor: pointer;
+        margin-right: 10px;
+        display: none; /* Hide initially on larger screens */
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        margin-right: 20px;
+    }
+
+    .logo img {
+        height: auto; /* Maintain aspect ratio */
+        max-height: 30px; /* Set a max-height for the images */
+    }
+
+    .logo img:first-child {
+        width: 50px; /* Width of the left logo */
+    }
+
+    .logo img:last-child {
+        width: 100px; /* Width of the right logo */
+    }
+
+    .navbar-right {
+        display: flex;
+        align-items: center;
+    }
+
+    input[type="text"] {
+        padding: 8px;
+        border: none;
+        border-radius: 4px;
+        margin-right: 10px;
+        font-size: 14px;
+    }
+
+    .menu {
+        display: flex;
+        align-items: center;
+    }
+
+    .menu a {
+        color: #fff;
+        text-decoration: none;
+        padding: 8px 15px;
+        font-size: 14px;
+        position: relative;
+    }
+
+    .menu .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #444;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        top: 100%;
+        right: 0;
+        min-width: 160px;
+    }
+
+    .menu .dropdown-content a {
+        color: #fff;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .menu .dropdown-content a:hover {
+        background-color: #555;
+    }
+
+    .menu .dropdown.show .dropdown-content {
+        display: block;
+    }
+
+
+/* Styles for cards */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center; /* Center the cards within the container */
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 220px; /* Adjusted width to fit content neatly */
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 370px; /* Set a fixed height for all cards */
+}
+
+.card img {
+    width: 100%;
+    height: 250px; /* Set a fixed height for all card images */
+    object-fit: cover; /* Ensures the image covers the area without distortion */
+    border-radius: 4px;
+}
+
+.card h3 {
+    margin: 10px 0;
+    font-size: 1.2em; /* Adjust font size for better readability */
+    flex-grow: 1; /* Ensures the title takes up available space */
+}
+
+/* Media query for responsive design */
+/* General Styles */
+
+
+/* Media Queries */
+/* Media Queries */
+@media (max-width: 768px) {
+    .menu-icon {
+        display: block;
+    }
+    header {
+        background-color: #2E2E2E;
+        color: #FFA857;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        width: 109%;
+    }
+
+    .menu {
+        display: none;
+        flex-direction: column;
+        background-color: #444;
+        position: absolute;
+        top: 50px;
+        right: 0;
+        left: 0;
+        width: 100%;
+        padding: 10px;
+        border-radius: 4px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .menu.show {
+        display: flex;
+    }
+
+    .menu a {
+        padding: 10px;
+        border-bottom: 1px solid #555;
+    }
+
+    .menu a:last-child {
+        border-bottom: none;
+    }
+
+    .menu .dropdown-content {
+        position: static;
+        box-shadow: none;
+    }
+
+    .menu .dropdown-content a {
+        border-bottom: 1px solid #555;
+    }
+
+    .menu .dropdown-content a:last-child {
+        border-bottom: none;
+    }
+    
+
+    .card-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Two columns */
+        gap: 20px;
+        justify-items: center;
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    .card {
+    background: rgb(244, 242, 242);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 190px; /* Adjusted width to fit content neatly */
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 370px; /* Set a fixed height for all cards */
+}
+    .card-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Two columns */
+        gap: 20px;
+        justify-items: center;
+    }
+}
+
+
+</style>
+</head>
+<body>
+
+<header>
+    <div class="navbar">
+        <div class="navbar-left">
+            <span class="menu-icon" onclick="toggleMenu()">☰</span>
+            <a href="#" class="logo">
+                <img src="image/watch1.png" alt="Left Logo">
+                <img src="image/log1.png" alt="Right Logo">
+            </a>
+        </div>
+        <div class="navbar-right">
+            <input type="text" placeholder="Search...">
+            <div id="menu" class="menu">
+                <a href="#" id="home">Home</a>
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle" onclick="toggleDropdown(event)">Genre</a>
+                    <div class="dropdown-content">
+                        <a href="#" data-genre="action">Action</a>
+                        <a href="#" data-genre="comedy">Comedy</a>
+                        <a href="#" data-genre="drama">Drama</a>
+                        <a href="#" data-genre="horror">Horror</a>
+                        <a href="#" data-genre="sci-fi">Sci-Fi</a>
+                    </div>
+                </div>
+                <a href="#" id="movies">Movies</a>
+                <a href="#" id="series">Series</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div class="card-container">
+    <!-- Movie Cards -->
+    
+    <a href="avengers.html" style="text-decoration: none; color: inherit;">
+        <div class="card movie-card" data-genre="action">
+            <img src="image/avenger.jpg" alt="Action Photo">
+            <h3>Avengers Infinity War</h3>
+            <p>Action</p>
+        </div>
+    </a>
+    <a href="badguys.html" style="text-decoration: none; color: inherit;">
+    <div class="card movie-card" data-genre="action">
+        <img src="image/bgg.jpg" alt="Action Photo">
+        <h3>The Bad Guys</h3>
+        <p>Action</p>
+    </div>
+</a>
+    <a href="moron5.html" style="text-decoration: none; color: inherit;">
+        <div class="card movie-card" data-genre="comedy">
+            <img src="image/moron5.jpg" alt="Comedy Photo">
+            <h3>Moron 5</h3>
+            <p>Comedy</p>
+        </div>
+    </a>
+
+    <a href="die.html" style="text-decoration: none; color: inherit;">
+    <div class="card movie-card" data-genre="comedy">
+        <img src="image/die.jpg" alt="Comedy Photo">
+        <h3>Wang Fam</h3>
+        <p>Comedy</p>
+    </div>
+</a>
+    <a href="barboys.html" style="text-decoration: none; color: inherit;">
+    <div class="card movie-card" data-genre="drama">
+        <img src="image/barboys.jpg" alt="Drama Photo">
+        <h3>The Bar Boys</h3>
+        <p>Drama</p>
+    </div>
+</a>
+
+<a href="sdtg.html" style="text-decoration: none; color: inherit;">
+    <div class="card movie-card" data-genre="drama">
+        <img src="image/sdtg.jpg" alt="Drama Photo">
+        <h3>She's Dating a Gangster</h3>
+        <p>Drama</p>
+    </div>
+</a>
+
+    <div class="card movie-card" data-genre="horror">
+        <img src="image/evil.jfif" alt="Horror Photo">
+        <h3>Evil Dead Rise</h3>
+        <p>Horror</p>
+    </div>
+    
+    <a href="monsterhouse.html" style="text-decoration: none; color: inherit;">
+        <div class="card movie-card" data-genre="horror">
+            <img src="image/Monster_House.jpg" alt="Horror Photo">
+            <h3>Monster House</h3>
+            <p>Horror</p>
+        </div>
+    </a>
+    <a href="BRIDGETOTERABITHIA.html" style="text-decoration: none; color: inherit;">
+        <div class="card movie-card" data-genre="sci-fi">
+            <img src="image/bridge.jpg" alt="Sci-Fi Photo">
+            <h3>Bridge to Terabithia</h3>
+            <p>Sci-Fi</p>
+        </div>
+    </a>
+    <div class="card movie-card" data-genre="sci-fi">
+        <img src="image/dragonball.jpg" alt="Sci-Fi Photo">
+        <h3>Sci-Fi Movie 2</h3>
+        <p>Sci-Fi</p>
+    </div>
+
+    <!-- Series Cards -->
+    <div class="card series-card" data-genre="action">
+        <img src="image/ap.jfif" alt="Action Series Photo">
+        <h3>Ang Probinsyano</h3>
+        <p>Action</p>
+    </div>
+    <div class="card series-card" data-genre="action">
+        <img src="image/arcane.jpg" alt="Action Series Photo">
+        <h3>Arcane</h3>
+        <p>Action</p>
+    </div>
+    <div class="card series-card" data-genre="comedy">
+        <img src="image/com1.jpg" alt="Comedy Series Photo">
+        <h3>The Characters</h3>
+        <p>Comedy</p>
+    </div>
+    <div class="card series-card" data-genre="comedy">
+        <img src="image/sheldon.jpg" alt="Comedy Series Photo">
+        <h3>Young Sheldon</h3>
+        <p>Comedy</p>
+    </div>
+    <div class="card series-card" data-genre="drama">
+        <img src="image/meteorgaren.jpg" alt="Drama Series Photo">
+        <h3>Meteor Garden(2002)</h3>
+        <p>Drama</p>
+    </div>
+    <div class="card series-card" data-genre="drama">
+        <img src="image/trueb.jpg" alt="Drama Series Photo">
+        <h3>True Beauty</h3>
+        <p>Drama</p>
+    </div>
+    <div class="card series-card" data-genre="horror">
+        <img src="image/ssk.jpg" alt="Horror Series Photo">
+        <h3>Shake Rattle and Roll</h3>
+        <p>Horror</p>
+    </div>
+    <div class="card series-card" data-genre="horror">
+        <img src="image/jun.jpg" alt="Horror Series Photo">
+        <h3>Junji Ito</h3>
+        <p>Horror</p>
+    </div>
+    <div class="card series-card" data-genre="sci-fi">
+        <img src="image/tokyorev.jpg" alt="Sci-Fi Series Photo">
+        <h3>Tokyo Revengers</h3>
+        <p>Sci-Fi</p>
+    </div>
+    <a href="kaijuno.8.html" style="text-decoration: none; color: inherit;">
+        <div class="card series-card" data-genre="sci-fi">
+            <img src="image/kaiju.jpg" alt="Sci-Fi Series Photo">
+            <h3>Sci-Fi Series 2</h3>
+            <p>Sci-Fi</p>
+        </div>
+    </a>
+</div>
+
+<script>
+
+    // Show the overlay when the page loads
+window.addEventListener('load', function() {
+    document.getElementById('welcome-overlay').style.display = 'flex';
+});
+
+// Function to close the overlay
+function closeOverlay() {
+    document.getElementById('welcome-overlay').style.display = 'none';
+}
+
+    let currentCategory = 'all'; // Track the current category (all, movies, series)
+
+    function toggleMenu() {
+        var menu = document.getElementById("menu");
+        menu.classList.toggle("show");
+    }
+
+    function toggleDropdown(event) {
+        event.preventDefault();
+        var dropdown = event.target.closest('.dropdown');
+        var allDropdowns = document.querySelectorAll('.dropdown');
+
+        allDropdowns.forEach(function(d) {
+            if (d !== dropdown) {
+                d.classList.remove('show');
+            }
+        });
+
+        dropdown.classList.toggle("show");
+    }
+
+    document.addEventListener('click', function(event) {
+        var isClickInside = event.target.closest('.dropdown');
+        if (!isClickInside) {
+            var dropdowns = document.querySelectorAll('.dropdown');
+            dropdowns.forEach(function(dropdown) {
+                dropdown.classList.remove('show');
+            });
+        }
+    });
+
+    document.querySelectorAll('.dropdown-content a').forEach(function(link) {
+        link.addEventListener('click', function() {
+            var genre = this.getAttribute('data-genre');
+            filterCards(currentCategory, genre);
+        });
+    });
+
+    document.getElementById('home').addEventListener('click', function() {
+        currentCategory = 'all';
+        filterCards(currentCategory);
+    });
+
+    document.getElementById('movies').addEventListener('click', function() {
+        currentCategory = 'movie';
+        filterCards(currentCategory);
+    });
+
+    document.getElementById('series').addEventListener('click', function() {
+        currentCategory = 'series';
+        filterCards(currentCategory);
+    });
+
+    function filterCards(category, genre) {
+        var cards = document.querySelectorAll('.card');
+
+        cards.forEach(function(card) {
+            let isCategoryMatch = (category === 'all') ||
+                                  (category === 'movie' && card.classList.contains('movie-card')) ||
+                                  (category === 'series' && card.classList.contains('series-card'));
+
+            let isGenreMatch = !genre || card.getAttribute('data-genre') === genre;
+
+            if (isCategoryMatch && isGenreMatch) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+</script>
+<div id="welcome-overlay" class="overlay">
+    <div class="overlay-content">
+        <h2>Note:</h2>
+        <p>This website is still under construction and not yet fully functional and has a lot of bugs this bugs and issues can be fix easily however the developer got lazy and didn't complete it.</p>
+        <button onclick="closeOverlay()">Click  to continue</button>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Video</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            color: #2E2E2E;
+        }
+        header {
+    background-color: #111111;
+    color: #FFA857;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-x: hidden; /* Prevent horizontal overflow */
+  
+}
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            justify-content: space-between;
+            flex-wrap: wrap; /* Allow elements to wrap */
+        }
+
+        .navbar-right {
+            display: flex;
+            align-items: left;
+            margin-left: auto;
+            flex-wrap: wrap; /* Allow elements to wrap */
+            width: 20%;
+        }
+
+        .navbar-right a {
+            color: #FFA857;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 10px; /* Add margin to separate links */
+            padding: 5px; /* Add padding for better click area */
+        }
+
+        .navbar-right a:hover {
+            text-decoration: underline;
+        }
+
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap; /* Allow elements to wrap */
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo img {
+            max-height: 30px;
+        }
+
+        .logo img:first-child {
+            width: 50px;
+        }
+
+        .logo img:last-child {
+            width: 100px;
+            margin-left: 10px;
+            max-width: 100%; /* Ensure image does not exceed container width */
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        .video-section {
+            flex: 1;
+            max-width: 800px;
+            margin-right: 20px;
+        }
+
+        .video-section iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-details {
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        .video-details h1 {
+            font-size: 2em;
+            margin: 0 0 10px;
+            color: #2E2E2E;
+        }
+
+        .video-details p {
+            margin: 0;
+            color: #555;
+        }
+
+        .episode-list {
+            flex: 1;
+            max-width: 400px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .episode-list h2 {
+            color: #2E2E2E;
+            margin-bottom: 20px;
+        }
+
+        .episode {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .episode img {
+            width: 120px;
+            height: auto;
+            margin-right: 15px;
+            border-radius: 4px;
+        }
+
+        .episode a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .episode a:hover {
+            text-decoration: underline;
+            color: #0056b3;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            main {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .video-section {
+                margin-right: 0;
+                margin-bottom: 20px;
+                max-width: 100%;
+            }
+
+            .episode-list {
+                max-width: 100%;
+            }
+
+            .video-section iframe {
+                height: 300px;
+            }
+
+            .episode img {
+                width: 80px;
+                margin-right: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .video-section iframe {
+                height: 200px;
+            }
+
+            .video-details h1 {
+                font-size: 1.5em;
+            }
+
+            .episode img {
+                width: 60px;
+                margin-right: 10px;
+            }
+        }
+    </style>
+    <script>
+        function playEpisode(url, title, description) {
+            document.getElementById('videoPlayer').src = url;
+            document.getElementById('videoTitle').innerText = title;
+            document.getElementById('videoDescription').innerText = description;
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="navbar-left">
+                <a href="#" class="logo">
+                    <img src="image/watch1.png" alt="Left Logo">
+                    <img src="image/log1.png" alt="Right Logo">
+                </a>
+            </div>
+            <div class="navbar-right">
+                <a href="ANIMEPAGE.HTML">Home</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="video-section">
+            <iframe id="videoPlayer" src="https://www.youtube.com/embed/QSEHxG4-aWY?si=6tv_4J3abVBUDxa3" frameborder="0" allowfullscreen></iframe>
+            <div class="video-details">
+                <h1 id="videoTitle">KAIJU NO.8 (Trailer)</h1>
+                <p id="videoDescription">This is the description of the Monster House video. Enjoy watching!</p>
+            </div>
+        </div>
+        
+        <div class="episode-list">
+            <h2>Episodes</h2>
+            <div class="episode">
+                <img src="image/ep1.png" alt="Episode 1 Thumbnail">
+                <a href="javascript:void(0)" onclick="playEpisode('https://www.youtube.com/embed/9m44j_MWBHs?si=sAWYyorXSxc9RPHe', 'Episode 1: The Beginning', 'Description for Episode 1')">Episode 1: The Beginning</a>
+            </div>
+            <div class="episode">
+                <img src="image/ep2.png" alt="Episode 2 Thumbnail">
+                <a href="javascript:void(0)" onclick="playEpisode('https://www.youtube.com/embed/LHHBI76514g?si=vzXBU4Hs9_gzmP3Q', 'Episode 2: The Journey Continues', 'Description for Episode 2')">Episode 2: The Journey Continues</a>
+            </div>
+            <div class="episode">
+                <img src="image/3.jpg" alt="Episode 3 Thumbnail">
+                <a href="javascript:void(0)" onclick="playEpisode('https://www.youtube.com/embed/-TUQWO46SxQ?si=rKLQUlCOlgv4h6s1', 'Episode 3: A New Challenge', 'Description for Episode 3')">Episode 3: A New Challenge</a>
+            </div>
+            <div class="episode">
+                <img src="image/4.jpg" alt="Episode 4 Thumbnail">
+                <a href="javascript:void(0)" onclick="playEpisode('https://www.youtube.com/embed/vUXKV2qBIoo?si=yWL4OYRCow5tkgk9', 'Episode 4: The Turning Point', 'Description for Episode 4')">Episode 4: The Turning Point</a>
+            </div>
+            <div class="episode">
+                <img src="image/5.jpg" alt="Episode 5 Thumbnail">
+                <a href="javascript:void(0)" onclick="playEpisode('https://www.youtube.com/embed/32qEgLJhi80?si=vCG_FNeZcP8n5toi', 'Episode 5: The Final Showdown', 'Description for Episode 5')">Episode 5: The Final Showdown</a>
+            </div>
+            <div class="episode">
+                <img src="image/6.jpg" alt="Episode 6 Thumbnail">
+                <a href="javascript:void(0)" onclick="playEpisode('https://www.youtube.com/embed/h_sB_-X3GNY?si=6iAAqfbXf0vGI2Q0', 'Episode 6: The Unexpected Twist', 'Description for Episode 6')">Episode 6: The Unexpected Twist</a>
+            </div>
+            <div class="episode">
+                <img src="image/7.jpg" alt="Episode 7 Thumbnail">
+                <a href="javascript:void(0)" onclick="playEpisode('https://www.youtube.com/embed/XSJX-28Hv7w?si=bnWA9SONwhIsbY-7', 'Episode 7: Unraveling Mysteries', 'Description for Episode 7')">Episode 7: Unraveling Mysteries</a>
+            </div>
+            <div class="episode">
+                <img src="image/8.jpg" alt="Episode 8 Thumbnail">
+                <a href="javascript:void(0)" onclick="playEpisode('https://www.youtube.com/embed/gMktBx_Tqu0?si=o_SmqMHDlc0EtKFN', 'Episode 8: The Hidden Truth', 'Description for Episode 8')">Episode 8: The Hidden Truth</a>
+            </div>
+            <div class="episode">
+                <img src="image/9.jpg" alt="Episode 9 Thumbnail">
+                <a href="javascript:void(0)" onclick="playEpisode('https://www.youtube.com/embed/y4NxTWQkK6A?si=FHMZe-XTdJCyoToa', 'Episode 9: The Final Confrontation', 'Description for Episode 9')">Episode 9: The Final Confrontation</a>
+            </div>
+            <div class="episode">
+                <img src="image/10.jpg" alt="Episode 10 Thumbnail">
+                <a href="javascript:void(0)" onclick="playEpisode('https://www.youtube.com/embed/P0FuOtaz-uE?si=oMsrvJad9s1M5BJL', 'Episode 10: The Resolution', 'Description for Episode 10')">Episode 10: The Resolution</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

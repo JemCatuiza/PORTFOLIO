@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokedex</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f8ff;
+            color: #333;
+        }
+        .welcome {
+            background-color: #ffcccb;
+            padding: 50px 0;
+            text-align: center;
+            color: #fff;
+        }
+        .welcome h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        .pokedex {
+            padding: 20px;
+        }
+        .pokemon-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .pokemon-card:hover {
+            transform: translateY(-10px);
+        }
+        .pokemon-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Welcome Section -->
+    <section class="welcome">
+        <div class="container">
+            <h1>Welcome to the Pokedex!</h1>
+            <p>Explore the world of Pokémon and discover your favorite ones.</p>
+        </div>
+    </section>
+
+    <!-- Pokedex Section -->
+    <section class="pokedex">
+        <div class="container">
+            <div class="row">
+                <!-- Pokemon Card 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card pokemon-card">
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" class="card-img-top" alt="Bulbasaur">
+                        <div class="card-body">
+                            <h5 class="card-title">Bulbasaur</h5>
+                            <p class="card-text">Type: Grass/Poison</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pokemon Card 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card pokemon-card">
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png" class="card-img-top" alt="Charmander">
+                        <div class="card-body">
+                            <h5 class="card-title">Charmander</h5>
+                            <p class="card-text">Type: Fire</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pokemon Card 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card pokemon-card">
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png" class="card-img-top" alt="Squirtle">
+                        <div class="card-body">
+                            <h5 class="card-title">Squirtle</h5>
+                            <p class="card-text">Type: Water</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
