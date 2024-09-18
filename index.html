@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
        body {
     font-family: Arial, sans-serif;
@@ -12,6 +13,9 @@
     line-height: 1.6;
     background-color: #f5f5f5;
 }
+html {
+    scroll-behavior: smooth;
+}
 
 header {
     background: linear-gradient(90deg, #35408E, #35408E);
@@ -19,6 +23,217 @@ header {
     padding: 20px 0;
     text-align: center;
     border-bottom: 5px solid #ffd41c
+}
+
+
+/* Portfolio section styles */
+#portfolio {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.projects {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.project {
+    background-color: #f9f9f9;
+    padding: 20px;
+    width: 300px; /* Fixed width for uniform cards */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.project h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.project img {
+    width: 100%;
+    height: 200px; /* Fixed height for uniform image sizes */
+    object-fit: cover; /* Ensure the image fits within the dimensions */
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.project p {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.view-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.view-button:hover {
+    background-color: #0056b3;
+}
+
+#blog {
+    background-color: linear-gradient(90deg, #35408E, #35408E);
+    padding: 60px 0;
+}
+
+#blog h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+#blog h2::after {
+    content: '';
+    width: 60px;
+    height: 3px;
+    background-color: #007bff;
+    display: block;
+    margin: 20px auto 0;
+}
+
+/* Timeline */
+.timeline {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding-left: 30px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background-color: #251751;
+    top: 0;
+    bottom: 0;
+    left: 30px;
+    margin-left: -24px;
+}
+
+.timeline-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 0;
+    }
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: #ffffff;
+    border: 2px solid linear-gradient(90deg, #35408E, #35408E);
+    border-radius: 50%;
+    top: 0;
+    left: 22px;
+}
+
+.timeline-logo {
+    flex: 0 0 70px;
+    margin-right: 20px;
+}
+
+.timeline-logo img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid #32125f;
+}
+
+.timeline-content {
+    background-color: #ffffff;
+    padding: 15px 20px;
+    border-left: 3px solid #063260;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.timeline-content h3 {
+    font-size: 1.4rem;
+    color: #1d174d;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.timeline-date {
+    font-size: 0.9rem;
+    color: #999;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.timeline-content p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .timeline {
+        padding-left: 0;
+    }
+
+    .timeline-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 0;
+    }
+    .timeline::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background-color: #251751;
+    top: 0;
+    bottom: 0;
+    left: 30px;
+    margin-left: -39px;
+}
+
+    .timeline-item::before {
+        left: -6px;
+    }
+
+    .timeline-content {
+        padding: 15px;
+        border-left: none;
+        box-shadow: none;
+        border-radius: 8px;
+        margin-left: 10px;
+    }
+
+    .timeline-logo {
+        margin-bottom: 10px;
+    }
+
+    .timeline-logo img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .timeline-content h3 {
+        font-size: 1.2rem;
+    }
+}
+
+.read-more:hover {
+    color: #0056b3;
 }
 
 nav ul {
@@ -102,6 +317,25 @@ form input, form textarea, form button {
     padding: 10px;
     font-size: 1em;
 }
+/* Initial state: elements are invisible */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px); /* Slightly moves elements down */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Active state: elements are visible */
+.fade-in.appear {
+    opacity: 1;
+    transform: translateY(0); /* Moves elements back to original position */
+}
+
+/* Active state: elements are visible */
+.fade-in.appear {
+    opacity: 1;
+    transform: translateY(0); /* Moves elements back to original position */
+}
+
 
 form button {
     background: #e52e71;
@@ -141,9 +375,10 @@ form button:hover {
     font-size: 1.1em;
 }
 
+/* Portfolio section */
 #portfolio {
     padding: 20px;
-    background-color:#35408E;
+    background-color: #35408E;
 }
 
 #portfolio h2 {
@@ -156,18 +391,23 @@ form button:hover {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    gap: 20px; /* Adding gap between cards for better spacing */
 }
 
 .project {
     background-color: #ffffff;
     border: 1px solid #ddd;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 22%;
     margin: 10px;
     padding: 15px;
     box-sizing: border-box;
     transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 400px; /* Ensure all cards have the same minimum height */
 }
 
 .project:hover {
@@ -181,7 +421,8 @@ form button:hover {
 
 .project img {
     width: 100%;
-    height: auto;
+    height: 100px; /* Fixed height for the image */
+    object-fit: cover; /* Ensures the image covers the space properly */
     margin-bottom: 10px;
     border-radius: 5px;
 }
@@ -189,12 +430,12 @@ form button:hover {
 .project p {
     font-size: 1em;
     color: #666;
+    margin-bottom: auto; /* Push the paragraph up if the content is smaller */
 }
 
 .view-button {
     display: inline-block;
     padding: 10px 20px;
-    margin-top: 10px;
     background-color: #35408E;
     color: #fff;
     text-align: center;
@@ -270,6 +511,30 @@ form button:hover {
     }
 }
 
+#testimonials {
+    text-align: center;
+    padding: 20px;
+}
+
+.testimonials {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.testimonial {
+    flex: 1 1 200px; /* Adjusts the width and ensures responsiveness */
+    
+}
+
+.testimonial img {
+    width: 100%;
+    height: auto;
+    border: 2px solid #ddd; /* Optional: Adds a border to the images */
+    border-radius: 8px; /* Optional: Adds rounded corners to the images */
+}
+
 #services {
     text-align: center;
     background: linear-gradient(135deg, #70e1f5 0%, #ffd194 100%);
@@ -297,7 +562,13 @@ form button:hover {
     align-items: center;
     height: 300px;
 }
-
+#menu-icon {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: #ffffff;
+    padding: 10px;
+}
 .service-icon {
     max-width: 100px;
     margin-bottom: 10px;
@@ -309,13 +580,70 @@ form button:hover {
         height: auto;
     }
 }
+@media (max-width: 1200px) {
+    .certificate {
+        flex: 1 1 calc(25% - 40px); /* 4 items per row */
+        max-width: calc(25% - 40px);
+    }
+}
+
+@media (max-width: 992px) {
+    .certificate {
+        flex: 1 1 calc(33.33% - 40px); /* 3 items per row */
+        max-width: calc(33.33% - 40px);
+    }
+}
+
+@media (max-width: 768px) {
+    .certificate {
+        flex: 1 1 calc(50% - 40px); /* 2 items per row */
+        max-width: calc(50% - 40px);
+    }
+    .certificate-container {
+        justify-content: center; /* Center items on small screens */
+    }
+    #menu-icon {
+        display: flex;
+    }
+
+    #nav-list {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        background-color: #35408E;
+        width: 100%;
+    }
+
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+
+    
+    
+}
+
+
+@media (max-width: 576px) {
+    .certificate-container {
+        justify-content: center; /* Center items on small screens */
+    }
+    .certificate {
+        flex: 1 1 100%; /* 1 item per row */
+        max-width: 100%;
+    }
+}
+#nav-list.active {
+    display: flex;
+}
 
     </style>
 </head>
 <body>
     <header>
         <nav>
-            <ul>
+            <div id="menu-icon" onclick="toggleMenu()">&#9776;</div>
+            <ul id="nav-list">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About Me</a></li>
                 <li><a href="#portfolio">Portfolio</a></li>
@@ -323,11 +651,17 @@ form button:hover {
                 <li><a href="#services">Services</a></li>
                 <li><a href="#testimonials">Testimonials</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <!-- PDF Resume Link with Font Awesome Icon -->
+                <li>
+                    <a href="image/catuizaresume.pdf" download>
+                        <i class="fas fa-file-pdf"></i>
+                    </a>
+                </li>
             </ul>
         </nav>
     </header>
 
-    <section id="home">
+    <section id="home" class="fade-in">
         <div class="intro">
             <div class="intro-text">
                 <h1>Welcome to My Portfolio</h1>
@@ -337,7 +671,7 @@ form button:hover {
         </div>
     </section>
 
-    <section id="about">
+    <section id="about" class="fade-in">
         <h2>About Me</h2>
         <p>
             I am John Emmanuel Catuiza, a Computer Engineering graduate from National University Fairview. I have a solid understanding of electronic microcontrollers such as ESP32 and Arduino. In addition, I possess basic knowledge in various software programming languages including HTML, CSS, JavaScript, and Python, and have experience with frameworks like Bootstrap. I also have a foundational background in VB.NET and MIT. With my combined skills in hardware and software, I am equipped to handle diverse technological challenges.
@@ -348,34 +682,118 @@ form button:hover {
     </section>
     
 
-    <section id="portfolio">
+    <section id="portfolio" class="fade-in">
         <h2>Portfolio</h2>
         <div class="projects">
             <!-- Project 1 -->
             <div class="project">
                 <h3>Snake Game</h3>
                 <img src="image/Snake.png" alt="Project 1 Photo">
-                <p>Project description for project 1...</p>
+                <p>Basic Snake Game</p>
                 <a href="snake.html" class="view-button">View</a>
             </div>
-           
+            <!-- Project 2 -->
+            <div class="project">
+                <h3>Disney Landing page</h3>
+                <img src="image/project2.png" alt="Project 2 Photo">
+                <p>A simple disney website in where you can watch disney cartoons</p>
+                <a href="Disney.html" class="view-button">View</a>
+            </div>
+            <!-- Project 3 -->
+            <div class="project" >
+                <h3>Movie Website</h3>
+                <img src="image/mvw.png" alt="Project 3 Photo">
+                <p>Movie Website use HTML,CSS AND JS</p>
+                <a href="ANIMEPAGE.HTML" class="view-button">View</a>
+            </div>
+            <!-- Project 4 -->
+            <div class="project">
+                <h3>Anime Sypnosis</h3>
+                <img src="image/sps.png" alt="Project 4 Photo">
+                <p>List of Anime syspnosis with the help of jiken API</p>
+                <a href="WEBAPI.html" class="view-button">View</a>
+            </div>
+            <div class="project">
+                <h3>Shool Information System</h3>
+                <img src="image/SIAS.png" alt="Project 5 Photo">
+                <p>A basic front end design of school information system</p>
+                <a href="prmsu.html.html" class="view-button">View</a>
+            </div>
+            <div class="project">
+                <h3>Shool Information System</h3>
+                <img src="image/lp.png" alt="Project 5 Photo">
+                <p>A basic company landing page</p>
+                <a href="hytec1.html" class="view-button">View</a>
+            </div>
+            
+            
         </div>
     </section>
     
 
 
-    <section id="blog">
-        <h2>Blog</h2>
-        <div class="posts">
-            <!-- Example blog post -->
-            <div class="post">
-                <h3>Blog Post Title</h3>
-                <p>Blog post summary...</p>
+    <section id="blog" class="fade-in">
+         <h2>Tech Experience</h2>
+    <div class="timeline">
+        <!-- Work Experience 1 -->
+        <div class="timeline-item">
+            <div class="timeline-logo">
+                <img src="image/hyteclog-removebg-preview.png" alt="Company 1 Logo">
+            </div>
+            <div class="timeline-content">
+                <h3> Intern at Hytec Power Inc</h3>
+                <span class="timeline-date">April  2024 - May 2024</span>
+                <ul>
+                    <li>Help in developing front end of CRM system using HTML,CSS and JS</li>
+                    <li>Developed a landing page and a front end of Document Management System Using CSS libraries Bootsrap and JS for the functionality</li>
+                    <li>Help in assisting FAE to tour the company visitor to the company buiding materials and equipement</li>
+                </ul>
+        </div>
+        <!-- Work Experience 2 -->
+        <div class="timeline-item">
+            <div class="timeline-logo">
+                <img src="image/nu-removebg-preview.png" alt="Company 2 Logo">
+            </div>
+            <div class="timeline-content">
+                <h3>Computer Engineer Student at National University</h3>
+                <span class="timeline-date">Aug 2020 - Aug 2024</span>
+                <ul>
+                    <li>Use python for simple console projects</li>
+                    <li>Experience  using python with the library of tkinter to use in the GUI of simple ATM program</li>
+                    <li>Create a windows form application that connect with microcontroller using vb.net and arduino</li>
+                    <li>Create a simple parking system with the use of aurduino and vb.net</li>
+                    <li>Implement a smart mouse trap monitoring that connect to windows form to navigate the status of the mouse trap</li>
+                    <li>Use ESP32 as a webserver and create a responsive webpage that get the status of the sensor and display it in the webpage dashboard</li>
+                    <li>Experience in building and troubleshooting a Computer</li>
+                    <li>Use breadboard to implement basic electronic circuit by the use of IC,Resistor, Transistor , Led , Sensors  and microcontroller</li>
+                </ul>
             </div>
         </div>
+        <!-- Work Experience 3 -->
+        <div class="timeline-item">
+            <div class="timeline-logo">
+                <img src="image/person.jpg" alt="Company 3 Logo">
+            </div>
+            <div class="timeline-content">
+                <h3>Personal Project</h3>
+                <span class="timeline-date"> present</span>
+                 <ul>
+                    <li>Experience creating a simple mini game using python and pygame library</li>
+                    <li>Experience fetching free API like POKEAPI to the webpage </li>
+                    <li>Created a simple landing page and websites</li>
+                    <li>Implement a simple static school information system using javascript(front end only)</li>
+                    <li>Explore different programming libraries such us tailwind,bootstrap and jquery</li>
+                    <li>Create a mini movie website and imbedd video from youtube</li>
+                    <li>Create a simple mini snake game using javascript</li>
+                    <li>Experience in using canva in creating assets like logo and images for the webpages and games that i'm doing </li>
+                </ul>
+            </div>
+        </div>
+    </div>
     </section>
+    
 
-    <section id="services">
+    <section id="services" class="fade-in">
     <h2>Skills</h2>
     <div class="services-container">
         <div class="service-row">
@@ -426,18 +844,27 @@ form button:hover {
 
     
 
-    <section id="testimonials">
-        <h2>Testimonials</h2>
-        <div class="testimonials">
-            <!-- Example testimonial -->
-            <div class="testimonial">
-                <p>"Client feedback..."</p>
-                <p>- Client Name</p>
-            </div>
+<section id="testimonials" class="fade-in">
+    <h2>Certificate</h2>
+    <div class="testimonials">
+        <!-- Example testimonial -->
+        <div class="testimonial">
+            <img src="image/CATUZA.JPG" alt="Certificate 1">
         </div>
-    </section>
+        <div class="testimonial">
+            <img src="image/CATUIZA.JPG" alt="Certificate 2">
+        </div>
+        <div class="testimonial">
+            <img src="image/CATUIZA (2).JPG" alt="Certificate 3">
+        </div>
+        <div class="testimonial">
+            <img src="image/CATUIZA (3).JPG" alt="Certificate 4">
+        </div>
+    </div>
+</section>
 
-    <section id="contact">
+
+    <section id="contact" class="fade-in">
         <h2>Contact</h2>
         <form>
             <label for="name">Name</label>
@@ -454,6 +881,27 @@ form button:hover {
     </section>
 
     <script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    const sliders = document.querySelectorAll('.post-slider');
+
+    sliders.forEach(slider => {
+        let currentSlide = 0;
+        const slides = slider.querySelectorAll('.slide');
+        slides[currentSlide].classList.add('active');
+
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 3000); // Change slide every 3 seconds
+    });
+});
+
+        function toggleMenu() {
+        const navList = document.getElementById('nav-list');
+        navList.classList.toggle('active');
+    }
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.querySelector('form');
             form.addEventListener('submit', function(event) {
@@ -462,6 +910,30 @@ form button:hover {
                 form.reset();
             });
         });
+        document.addEventListener('DOMContentLoaded', function() {
+    const faders = document.querySelectorAll('.fade-in');
+
+    const appearOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -100px 0px"
+    };
+
+    const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+                return;
+            } else {
+                entry.target.classList.add('appear');
+                appearOnScroll.unobserve(entry.target);
+            }
+        });
+    }, appearOptions);
+
+    faders.forEach(fader => {
+        appearOnScroll.observe(fader);
+    });
+});
+
     </script>
 </body>
 </html>
