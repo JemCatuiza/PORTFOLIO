@@ -35,7 +35,7 @@
             justify-content: center;
             align-items: center;
             font-family: Arial, sans-serif;
-            background-image: url('asset/space.jpg'); /* Replace with your image path */
+            background-image: url('assets/space.jpg'); /* Replace with your image path */
     background-size: cover; /* Cover the entire area */
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Don't repeat the image */
@@ -113,7 +113,7 @@
 <body>
 <!-- Add the video element for background -->
 <video id="backgroundVideo" autoplay loop muted>
-    <source src="asset/sfacegame.mp4" type="video/mp4">
+    <source src="assets/sfacegame.mp4" type="video/mp4">
     Your browser does not support the video tag.
 </video>
 
@@ -122,7 +122,7 @@
 <canvas id="gameCanvas"></canvas>
 
 <div id="welcomeScreen">
-    <img id="gameLogo" src="asset/SPEYS game1.png" alt="Game Logo"> <!-- Replace with your game logo path -->
+    <img id="gameLogo" src="assets/SPEYS game1.png" alt="Game Logo"> <!-- Replace with your game logo path -->
     <p>Click anywhere to continue</p>
 </div>
 
@@ -142,11 +142,11 @@
 <div id="shootButton" class="touch-control"></div>
 
 <!-- Load spaceship and alien images -->
-<img id="spaceshipImage" src="asset/spaceship.png" style="display:none;">
-<img id="alienImage" src="asset/enemybg.png" style="display:none;">
-<audio id="backgroundMusic" src="asset/bgm.mp3" loop></audio>
-<audio id="bulletSound" src="asset/lb.mp3"></audio> 
-<audio id="dogcry" src="asset/dogcry.mp3"></audio><!-- Replace with your actual bullet sound file path -->
+<img id="spaceshipImage" src="assets/spaceship.png" style="display:none;">
+<img id="alienImage" src="assets/enemybg.png" style="display:none;">
+<audio id="backgroundMusic" src="assets/bgm.mp3" loop></audio>
+<audio id="bulletSound" src="assets/lb.mp3"></audio> 
+<audio id="dogcry" src="assets/dogcry.mp3"></audio><!-- Replace with your actual bullet sound file path -->
 
 
 
@@ -163,9 +163,9 @@
 
     // Load spaceship and alien images
     const spaceshipImage = new Image();
-    spaceshipImage.src = 'asset/spaceship.png'; // Replace with actual path to your spaceship image
+    spaceshipImage.src = 'assets/spaceship.png'; // Replace with actual path to your spaceship image
     const alienImage = new Image();
-    alienImage.src = 'asset/enemybg.png'; // Replace with actual path to your alien image
+    alienImage.src = 'assets/enemybg.png'; // Replace with actual path to your alien image
 
 
 // Background music element
