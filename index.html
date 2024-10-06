@@ -653,7 +653,7 @@ form button:hover {
                 <li><a href="#contact">Contact</a></li>
                 <!-- PDF Resume Link with Font Awesome Icon -->
                 <li>
-                    <a href="image/CATUIZAJV_CV.pdf" download>
+                    <a href="image/catuizaresume.pdf" download>
                         <i class="fas fa-file-pdf"></i>
                     </a>
                 </li>
@@ -720,11 +720,18 @@ form button:hover {
                 <a href="prmsu.html.html" class="view-button">View</a>
             </div>
             <div class="project">
-                <h3>Basic Landing Page</h3>
+                <h3>Shool Information System</h3>
                 <img src="image/lp.png" alt="Project 5 Photo">
                 <p>A basic company landing page</p>
                 <a href="hytec1.html" class="view-button">View</a>
             </div>
+            <div class="project">
+                <h3>SPACE GAME</h3>
+                <img src="image/space.png" alt="Project 5 Photo">
+                <p>A BASIC SPACE SHOOTER</p>
+                <a href="spg.html" class="view-button">View</a>
+            </div>
+            
             
             
         </div>
@@ -864,21 +871,22 @@ form button:hover {
 </section>
 
 
-    <section id="contact" class="fade-in">
-        <h2>Contact</h2>
-        <form>
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" required>
+<section id="contact" class="fade-in">
+    <h2>Contact</h2>
+    <form action="save_contact.php" method="post">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
 
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
 
-            <label for="message">Message</label>
-            <textarea id="message" name="message" required></textarea>
+        <label for="message">Message</label>
+        <textarea id="message" name="message" required></textarea>
 
-            <button type="submit">Send</button>
-        </form>
-    </section>
+        <button type="submit">Send</button>
+    </form>
+</section>
+
 
     <script>
 
