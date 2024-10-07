@@ -141,20 +141,20 @@
 
    <!-- Welcome Screen -->
    <div class="welcome-screen" id="welcomeScreen">
-    <img src="asset/SPEYS game1.png" alt="Game Logo"> <!-- Replace with your logo -->
+    <img src="assetss/SPEYS game1.png" alt="Game Logo"> <!-- Replace with your logo -->
     <h1>Welcome to Space Shooter</h1>
     <p>Click anywhere to continue</p>
   </div>
 
   <!-- Background Music -->
   <audio id="backgroundMusic" loop>
-    <source src="asset/bgm.mp3" type="audio/mpeg">
+    <source src="assets/bgm.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
 
   <div class="game-container">
     <video class="background-video" autoplay loop muted>
-      <source src="asset/sfacegame.mp4" type="video/mp4">
+      <source src="assets/sfacegame.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
     <canvas id="gameCanvas"></canvas>
@@ -180,17 +180,17 @@
 
     // Load images for spaceship and enemy
     const spaceshipImg = new Image();
-    spaceshipImg.src = 'asset/spaceship.png'; // Provide a path to your spaceship image
+    spaceshipImg.src = 'assets/spaceship.png'; // Provide a path to your spaceship image
 
     const enemyImg = new Image();
-    enemyImg.src = 'asset/enemybg.png'; // Provide a path to your enemy image
+    enemyImg.src = 'assets/enemybg.png'; // Provide a path to your enemy image
 
     const backgroundMusic = document.getElementById("backgroundMusic");
     backgroundMusic.loop = true; // Set the background music to loop continuously
 
 
-    const gunshotSound = new Audio('asset/lb.mp3'); 
-    const dogcry = new Audio('asset/dogcry.mp3');// Provide the path to your gunshot sound file
+    const gunshotSound = new Audio('assets/lb.mp3'); 
+    const dogcry = new Audio('assets/dogcry.mp3');// Provide the path to your gunshot sound file
 
 // Function to play the gunshot sound
 function playBackgroundMusic() {
