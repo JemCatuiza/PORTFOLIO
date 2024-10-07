@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Space Shooter Game</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      background-color: #000;
+      font-family: Arial, sans-serif;
+    }
+
+    .welcome-screen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: #000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      z-index: 999;
+    }
+
+    .welcome-screen img {
+      width: 150px; /* Adjust logo size */
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    .welcome-screen h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .welcome-screen p {
+      font-size: 18px;
+    }
+
+    .background-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ensure video covers the entire background */
+      z-index: 0; /* Behind all other elements */
+    }
+    canvas {
+            position: relative; /* Ensure canvas is positioned above the video */
+            z-index: 1; /* Canvas is above the video */
+        }
+
+
+    .game-container {
+      position: relative;
+      width: 100vw;
+      height: calc(100vh - 100px); /* Full height minus control height */
+      overflow: hidden; /* Hide any overflow */
+      
+    }
+
+    #gameCanvas {
+      width: 100%;
+      height: 100%;
+      background-color: #11111100;
+      display: block;
+      
+    }
+
+    .controls {
+      position: relative;
+      height: 100px; /* Control height */
+      width: 100%;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      background-color: #222;
+      z-index: 1;
+    }
+
+    .controls button {
+      padding: 15px;
+      font-size: 18px;
+      color: white;
+      background-color: #444;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s ease;
+      width: 80px;
+    }
+
+    .controls button:hover {
+      background-color: #666;
+    }
+
+    .controls button:active {
+      background-color: #888;
+      transform: scale(0.98);
+    }
+
+    .controls button:focus {
+      outline: none;
+    }
+
+    .direction-controls {
+      display: flex;
+      justify-content: space-between;
+      width: 50%;
+    }
+
+    .fire-control {
+      margin-left: 20px;
+    }
+
+    .score {
+      color: white;
+      font-size: 24px;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+
+   <!-- Welcome Screen -->
+   <div class="welcome-screen" id="welcomeScreen">
+    <img src="asset/SPEYS game1.png" alt="Game Logo"> <!-- Replace with your logo -->
+    <h1>Welcome to Space Shooter</h1>
+    <p>Click anywhere to continue</p>
+  </div>
+
+  <!-- Background Music -->
+  <audio id="backgroundMusic" loop>
+    <source src="asset/bgm.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <div class="game-container">
+    <video class="background-video" autoplay loop muted>
+      <source src="asset/sfacegame.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <canvas id="gameCanvas"></canvas>
+    <div class="score" id="scoreDisplay">Score: 0</div>
+  </div>
+
+  <!-- Mobile Control Buttons -->
+  <div class="controls">
+    <div class="direction-controls">
+      <button id="leftBtn">←</button>
+      <div class="vertical-controls">
+        <button id="upBtn">↑</button>
+        <button id="downBtn">↓</button>
+      </div>
+      <button id="rightBtn">→</button>
+    </div>
+    <button id="shootBtn" class="fire-control">Shoot</button>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+
+    // Load images for spaceship and enemy
+    const spaceshipImg = new Image();
+    spaceshipImg.src = 'asset/spaceship.png'; // Provide a path to your spaceship image
+
+    const enemyImg = new Image();
+    enemyImg.src = 'asset/enemybg.png'; // Provide a path to your enemy image
+
+    const backgroundMusic = document.getElementById("backgroundMusic");
+    backgroundMusic.loop = true; // Set the background music to loop continuously
+
+
+    const gunshotSound = new Audio('asset/lb.mp3'); 
+    const dogcry = new Audio('asset/dogcry.mp3');// Provide the path to your gunshot sound file
+
+// Function to play the gunshot sound
+function playBackgroundMusic() {
+    backgroundMusic.currentTime = 0; // Reset the background music to the start
+    backgroundMusic.play(); // Play the background music
+  }
+  function stopBackgroundMusic() {
+    backgroundMusic.pause(); // Pause the background music
+  }
+function playGunshotSound() {
+  gunshotSound.currentTime = 3.9; // Reset sound to start from the beginning
+  gunshotSound.play(); // Play the sound
+}
+function playDogCry() {
+  dogcry.currentTime = 0; // Reset sound to start from the beginning
+  dogcry.play(); // Play the sound
+}
+
+
+    // Welcome screen functionality
+    const welcomeScreen = document.getElementById("welcomeScreen");
+    
+    welcomeScreen.addEventListener("click", () => {
+      welcomeScreen.style.display = "none"; // Hide welcome screen
+      backgroundMusic.play(); // Play background music
+      gameLoop(); // Start the game
+    });
+
+    // Adjust canvas to full screen size but leave space for controls
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight * 0.85; // 85% of the window height for the game area
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // Spaceship Properties
+    const spaceship = {
+      x: canvas.width / 2 - 20,
+      y: canvas.height - 60,
+      width: 40,
+      height: 40,
+      speed: 5,
+      bullets: [],
+    };
+
+    // Enemy Properties
+    const enemies = [];
+    const enemySpeed = 2;
+    const enemyFrequency = 1000; // Time in ms to spawn a new enemy
+
+    let moveLeft = false;
+    let moveRight = false;
+    let moveUp = false;
+    let moveDown = false;
+    let score = 0;
+
+    // Draw spaceship using image
+    function drawSpaceship() {
+      ctx.drawImage(spaceshipImg, spaceship.x, spaceship.y, spaceship.width, spaceship.height);
+    }
+
+    // Draw enemies using image
+    function drawEnemies() {
+      enemies.forEach((enemy, index) => {
+        ctx.drawImage(enemyImg, enemy.x, enemy.y, enemy.width, enemy.height);
+        enemy.y += enemySpeed; // Move enemy down
+        // Remove enemy if it goes off-screen
+        if (enemy.y > canvas.height) {
+          enemies.splice(index, 1);
+        }
+      });
+    }
+
+    // Check for bullet collision with enemies
+    function checkCollisions() {
+      spaceship.bullets.forEach((bullet, bulletIndex) => {
+        enemies.forEach((enemy, enemyIndex) => {
+          if (
+            bullet.x < enemy.x + enemy.width &&
+            bullet.x + bullet.width > enemy.x &&
+            bullet.y < enemy.y + enemy.height &&
+            bullet.y + bullet.height > enemy.y
+          ) {
+            // Collision detected
+            spaceship.bullets.splice(bulletIndex, 1); // Remove bullet
+            enemies.splice(enemyIndex, 1); // Remove enemy
+            score += 10; // Increase score
+            dogcry.play(); // Play the sound
+          }
+        });
+      });
+    }
+
+    // Update score display
+    function updateScoreDisplay() {
+      document.getElementById("scoreDisplay").innerText = `Score: ${score}`;
+    }
+
+    // Move spaceship continuously when a button is pressed
+    function moveSpaceship() {
+      if (moveLeft && spaceship.x > 0) {
+        spaceship.x -= spaceship.speed;
+      }
+      if (moveRight && spaceship.x < canvas.width - spaceship.width) {
+        spaceship.x += spaceship.speed;
+      }
+      if (moveUp && spaceship.y > 0) {
+        spaceship.y -= spaceship.speed;
+      }
+      if (moveDown && spaceship.y < canvas.height - spaceship.height) {
+        spaceship.y += spaceship.speed;
+      }
+    }
+
+    // Bullet properties and shooting function
+    function shootBullet() {
+      const bullet = { x: spaceship.x + spaceship.width / 2 - 2, y: spaceship.y, width: 4, height: 10, speed: 7 };
+      spaceship.bullets.push(bullet);
+      playGunshotSound(); // Play the gunshot sound
+    }
+
+    function drawBullets() {
+      spaceship.bullets.forEach((bullet, index) => {
+        bullet.y -= bullet.speed;
+        if (bullet.y < 0) {
+          spaceship.bullets.splice(index, 1); // Remove bullet if out of canvas
+        }
+        ctx.fillStyle = "#0f0";
+        ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+      });
+    }
+
+    // Spawn enemies
+    function spawnEnemy() {
+      const enemy = {
+        x: Math.random() * (canvas.width - 40), // Random x position
+        y: -40, // Start above the canvas
+        width: 40,
+        height: 40
+      };
+      enemies.push(enemy);
+    }
+
+    // Game loop
+    function gameLoop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawSpaceship();
+      drawBullets();
+      drawEnemies();
+      moveSpaceship();
+      checkCollisions();
+      updateScoreDisplay();
+      requestAnimationFrame(gameLoop);
+    }
+    // Add keyboard controls
+  document.addEventListener("keydown", (event) => {
+    switch (event.key) {
+      case "ArrowLeft":
+        moveLeft = true;
+        break;
+      case "ArrowRight":
+        moveRight = true;
+        break;
+      case "ArrowUp":
+        moveUp = true;
+        break;
+      case "ArrowDown":
+        moveDown = true;
+        break;
+      case " ":
+        shootBullet(); // Space key to shoot
+        break;
+    }
+  });
+
+  document.addEventListener("keyup", (event) => {
+    switch (event.key) {
+      case "ArrowLeft":
+        moveLeft = false;
+        break;
+      case "ArrowRight":
+        moveRight = false;
+        break;
+      case "ArrowUp":
+        moveUp = false;
+        break;
+      case "ArrowDown":
+        moveDown = false;
+        break;
+    }
+  });
+
+  // Existing code for mobile controls remains the same
+
+  // Handle button press for continuous movement (already included in your previous code)
+  document.getElementById("leftBtn").addEventListener("mousedown", () => moveLeft = true);
+  document.getElementById("leftBtn").addEventListener("mouseup", () => moveLeft = false);
+  document.getElementById("leftBtn").addEventListener("touchstart", () => moveLeft = true);
+  document.getElementById("leftBtn").addEventListener("touchend", () => moveLeft = false);
+
+  document.getElementById("rightBtn").addEventListener("mousedown", () => moveRight = true);
+  document.getElementById("rightBtn").addEventListener("mouseup", () => moveRight = false);
+  document.getElementById("rightBtn").addEventListener("touchstart", () => moveRight = true);
+  document.getElementById("rightBtn").addEventListener("touchend", () => moveRight = false);
+
+  document.getElementById("upBtn").addEventListener("mousedown", () => moveUp = true);
+  document.getElementById("upBtn").addEventListener("mouseup", () => moveUp = false);
+  document.getElementById("upBtn").addEventListener("touchstart", () => moveUp = true);
+  document.getElementById("upBtn").addEventListener("touchend", () => moveUp = false);
+
+  document.getElementById("downBtn").addEventListener("mousedown", () => moveDown = true);
+  document.getElementById("downBtn").addEventListener("mouseup", () => moveDown = false);
+  document.getElementById("downBtn").addEventListener("touchstart", () => moveDown = true);
+  document.getElementById("downBtn").addEventListener("touchend", () => moveDown = false);
+
+  // Handle shooting
+  document.getElementById("shootBtn").addEventListener("mousedown", shootBullet);
+  document.getElementById("shootBtn").addEventListener("touchstart", shootBullet);
+
+    // Handle button press for continuous movement
+    document.getElementById("leftBtn").addEventListener("mousedown", () => moveLeft = true);
+    document.getElementById("leftBtn").addEventListener("mouseup", () => moveLeft = false);
+    document.getElementById("leftBtn").addEventListener("touchstart", () => moveLeft = true);
+    document.getElementById("leftBtn").addEventListener("touchend", () => moveLeft = false);
+
+    document.getElementById("rightBtn").addEventListener("mousedown", () => moveRight = true);
+    document.getElementById("rightBtn").addEventListener("mouseup", () => moveRight = false);
+    document.getElementById("rightBtn").addEventListener("touchstart", () => moveRight = true);
+    document.getElementById("rightBtn").addEventListener("touchend", () => moveRight = false);
+
+    document.getElementById("upBtn").addEventListener("mousedown", () => moveUp = true);
+    document.getElementById("upBtn").addEventListener("mouseup", () => moveUp = false);
+    document.getElementById("upBtn").addEventListener("touchstart", () => moveUp = true);
+    document.getElementById("upBtn").addEventListener("touchend", () => moveUp = false);
+
+    document.getElementById("downBtn").addEventListener("mousedown", () => moveDown = true);
+    document.getElementById("downBtn").addEventListener("mouseup", () => moveDown = false);
+    document.getElementById("downBtn").addEventListener("touchstart", () => moveDown = true);
+    document.getElementById("downBtn").addEventListener("touchend", () => moveDown = false);
+
+    // Handle shooting
+    document.getElementById("shootBtn").addEventListener("mousedown", shootBullet);
+    document.getElementById("shootBtn").addEventListener("touchstart", shootBullet);
+
+    let gameOver = false; // Flag to track game over state
+
+// Game over function
+function showGameOver() {
+
+ 
+  // Stop the game
+  gameOver = true;
+  stopBackgroundMusic();
+  // Stop background music
+ 
+  
+  // Clear the canvas
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  // Show Game Over text
+  ctx.fillStyle = "red";
+  ctx.font = "48px Arial";
+  ctx.textAlign = "center";
+  ctx.fillText("Game Over", canvas.width / 2, canvas.height / 2);
+
+  // Optionally, show the score on the Game Over screen
+  ctx.font = "24px Arial";
+  ctx.fillText(`Final Score: ${score}`, canvas.width / 2, canvas.height / 2 + 50);
+
+  // Optionally, provide a restart option
+  ctx.font = "18px Arial";
+  ctx.fillText("Press R to Restart", canvas.width / 2, canvas.height / 2 + 100);
+}
+
+// Restart the game
+function restartGame() {
+  // Reset game state
+  playBackgroundMusic(); // Play the sound
+  gameOver = false;
+  score = 0;
+  enemies.length = 0; // Clear enemies
+  spaceship.bullets.length = 0; // Clear bullets
+  spaceship.x = canvas.width / 2 - spaceship.width / 2;
+  spaceship.y = canvas.height - 60;
+  gameLoop(); // Restart game loop
+}
+
+// Check for collisions between the spaceship and enemies
+function checkGameOverCollision() {
+  enemies.forEach((enemy) => {
+    if (
+      spaceship.x < enemy.x + enemy.width &&
+      spaceship.x + spaceship.width > enemy.x &&
+      spaceship.y < enemy.y + enemy.height &&
+      spaceship.y + spaceship.height > enemy.y
+    ) {
+      showGameOver(); // Trigger game over
+    }
+  });
+}
+
+// Update game loop to stop when the game is over
+function gameLoop() {
+  if (gameOver) return; // Stop the loop if the game is over
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawSpaceship();
+  drawBullets();
+  drawEnemies();
+  moveSpaceship();
+  checkCollisions();
+  checkGameOverCollision(); // Check if the player collided with an enemy
+  updateScoreDisplay();
+
+  requestAnimationFrame(gameLoop); // Continue the game loop
+}
+
+// Add a key listener for restarting the game
+window.addEventListener("keydown", (event) => {
+  if (event.key === "r" || event.key === "R") {
+    if (gameOver) restartGame(); // Restart the game if it's over
+  }
+});
+
+// Add a click event listener for restarting the game
+window.addEventListener("click", () => {
+  if (gameOver) {
+    restartGame(); // Restart the game if it's over
+    playBackgroundMusic();
+  }
+});
+
+
+    // Start the game loop
+    gameLoop();
+
+    // Spawn enemies at intervals
+    setInterval(spawnEnemy, enemyFrequency);
+  </script>
+</body>
+</html>
